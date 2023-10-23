@@ -1,6 +1,7 @@
 // global variables
 let markerSwitchValue = 0;
 let targetValue = "X"
+let gameBoardArray = ["", "", "", "", "", "", "", "", ""];
 /*
 let playerClick = function (event) {
     let target = event.target
@@ -10,10 +11,38 @@ let playerClick = function (event) {
 };
 */
 
+let gameCheck = function () {
+    // row checks
+    if (gameBoardArray[0] === gameBoardArray[1] && gameBoardArray[1] === gameBoardArray[2] && gameBoardArray[2] !== "") {
+        return gameBoardArray[0];
+    } else if (gameBoardArray[3] === gameBoardArray[4] && gameBoardArray[4] === gameBoardArray[5] && gameBoardArray[5] !== "") {
+        return gameBoardArray[3];
+    } else if (gameBoardArray[6] === gameBoardArray[7] && gameBoardArray[7] === gameBoardArray[8] && gameBoardArray[8] !== "") {
+        return gameBoardArray[6];
+    }
+    // column checks
+    else if (gameBoardArray[0] === gameBoardArray[3] && gameBoardArray[3] === gameBoardArray[6] && gameBoardArray[6] !== "") {
+        return gameBoardArray[0];
+    } else if (gameBoardArray[1] === gameBoardArray[4] && gameBoardArray[4] === gameBoardArray[7] && gameBoardArray[7] !== "") {
+        return gameBoardArray[1];
+    } else if (gameBoardArray[2] === gameBoardArray[5] && gameBoardArray[5] === gameBoardArray[8] && gameBoardArray[8] !== "") {
+        return gameBoardArray[2];
+    }
+    // diagonal checks
+    else if (gameBoardArray[0] === gameBoardArray[4] && gameBoardArray[4] === gameBoardArray[8] && gameBoardArray[8] !== "") {
+        return gameBoardArray[0];
+    } else if (gameBoardArray[2] === gameBoardArray[4] && gameBoardArray[4] === gameBoardArray[6] && gameBoardArray[6] !== "") {
+        return gameBoardArray[2];
+    } else {
+        return "continue";
+    }
+}
+
 let documentReady = function () {
     let gameBoard = document.getElementById("board");
+    let status = document.getElementById("status");
+    let gameWinCheck = "";
     let iterator = 0;
-    let gameBoardArray = ["", "", "", "", "", "", "", "", ""];
     let currentId = "";
 
     for (let square of gameBoard.children) {
@@ -43,6 +72,13 @@ let documentReady = function () {
                 gameBoardArray[`${Number(currentId)}`] = targetValue;
             }
             console.log(gameBoardArray);
+            gameWinCheck = gameCheck();
+            if (gameWinCheck !== "continue") {
+                status.textContent = `Congratulations! ${gameWinCheck} is the Winner!`;
+                status.classList.add("you-won");
+            }
+            console.log(status.textContent);
+
         });
         iterator += 1;
 
@@ -55,7 +91,6 @@ let documentReady = function () {
         });
     }
 
-    let gameEnd = false;
 }
 //ensures the html loads before javascript is ran
 document.addEventListener('DOMContentLoaded', (event) => {
