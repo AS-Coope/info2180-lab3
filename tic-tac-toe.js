@@ -2,6 +2,9 @@
 let markerSwitchValue = 0;
 let targetValue = "X"
 let gameBoardArray = ["", "", "", "", "", "", "", "", ""];
+let gameWinCheck = "";
+let iterator = 0;
+let currentId = "";
 /*
 let playerClick = function (event) {
     let target = event.target
@@ -41,9 +44,6 @@ let gameCheck = function () {
 let documentReady = function () {
     let gameBoard = document.getElementById("board");
     let status = document.getElementById("status");
-    let gameWinCheck = "";
-    let iterator = 0;
-    let currentId = "";
 
     for (let square of gameBoard.children) {
         square.classList.add("square");
