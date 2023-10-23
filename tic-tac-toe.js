@@ -12,7 +12,6 @@ let playerClick = function (event) {
 
 let documentReady = function () {
     let gameBoard = document.getElementById("board");
-    let element = gameBoard.querySelector("div");
     let iterator = 0;
     let gameBoardArray = ["", "", "", "", "", "", "", "", ""];
     let currentId = "";
@@ -46,6 +45,14 @@ let documentReady = function () {
             console.log(gameBoardArray);
         });
         iterator += 1;
+
+        // functionality to change style of a cell when hovered over
+        square.addEventListener('mouseover', (event) => {
+            square.classList.add("hover");
+        });
+        square.addEventListener('mouseout', (event) => {
+            square.classList.remove("hover");
+        });
     }
 
     let gameEnd = false;
