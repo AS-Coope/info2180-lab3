@@ -71,7 +71,13 @@ let documentReady = function () {
                 currentId = square.getAttribute("id");
                 gameBoardArray[`${Number(currentId)}`] = targetValue;
             }
+
+            // see printout of game board in console
             console.log(gameBoardArray);
+            console.log(`Current ID: ${currentId}`);
+            console.log(`Iterator: ${iterator}`);
+
+            // check if someone won the game and who
             gameWinCheck = gameCheck();
             if (gameWinCheck !== "continue") {
                 status.textContent = `Congratulations! ${gameWinCheck} is the Winner!`;
@@ -89,17 +95,17 @@ let documentReady = function () {
         square.addEventListener('mouseout', (event) => {
             square.classList.remove("hover");
         });
+
     }
 
 }
 
 let gameRestart = function () {
+    console.log("Game Restart Function called");
     let gameBoard = document.getElementById("board");
     let status = document.getElementById("status");
     gameBoardArray = ["", "", "", "", "", "", "", "", ""];
     gameWinCheck = "";
-    iterator = 0;
-    currentId = "";
     markerSwitchValue = 0;
     targetValue = "X";
 
@@ -114,12 +120,17 @@ let gameRestart = function () {
 
         // removing the targets from each square where applicable
         square.textContent = "";
-        square.removeAttribute("id");
         status.textContent = "Move your mouse over a square and click to play an X or an O.";
+        status.classList.remove("you-won");
     }
 }
 
 //ensures the html loads before javascript is ran
 document.addEventListener('DOMContentLoaded', (event) => {
     documentReady();
+    let restartBtn = document.getElementsByClassName("btn");
+
+    restartBtn[0].addEventListener('click', (event) => {
+        gameRestart();
+    });
 });
