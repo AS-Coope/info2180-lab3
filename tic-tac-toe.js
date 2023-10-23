@@ -5,14 +5,6 @@ let gameBoardArray = ["", "", "", "", "", "", "", "", ""];
 let gameWinCheck = "";
 let iterator = 0;
 let currentId = "";
-/*
-let playerClick = function (event) {
-    let target = event.target
-    targetValue = (markerSwitchValue === 0) ? "X" : "O";
-    console.log(targetValue);
-    markerSwitchValue = (markerSwitchValue === 0) ? 1 : 0;
-};
-*/
 
 let gameCheck = function () {
     // row checks
@@ -86,8 +78,8 @@ let documentReady = function () {
 
             // see printout of game board in console
             console.log(gameBoardArray);
-            console.log(`Current ID: ${currentId}`);
-            console.log(`Iterator: ${iterator}`);
+            //console.log(`Current ID: ${currentId}`);
+            //console.log(`Iterator: ${iterator}`);
 
             // check if someone won the game and who
             gameWinCheck = gameCheck();
