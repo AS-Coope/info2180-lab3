@@ -58,21 +58,15 @@ let documentReady = function () {
                 markerSwitchValue = (markerSwitchValue === 0) ? 1 : 0;
             } else {
                 if (targetValue === "X") {
-                    if (square.classList.contains("O")) {
-                        square.classList.remove("O");
-                    }
                     square.textContent = targetValue;
                     square.classList.add("X");
                     currentId = square.getAttribute("id");
-                    gameBoardArray[`${Number(currentId)}`] = targetValue;
+                    gameBoardArray[`${Number(currentId)}`] = targetValue; // matches the state of the game board in an array
                 } else {
-                    if (square.classList.contains("X")) {
-                        square.classList.remove("X");
-                    }
                     square.textContent = targetValue;
                     square.classList.add("O");
                     currentId = square.getAttribute("id");
-                    gameBoardArray[`${Number(currentId)}`] = targetValue;
+                    gameBoardArray[`${Number(currentId)}`] = targetValue; // matches the state of the game board in an array
                 }
             }
 
@@ -81,7 +75,7 @@ let documentReady = function () {
             //console.log(`Current ID: ${currentId}`);
             //console.log(`Iterator: ${iterator}`);
 
-            // check if someone won the game and who
+            // check if someone won the game and which player won
             gameWinCheck = gameCheck();
             if (gameWinCheck !== "continue") {
                 status.textContent = `Congratulations! ${gameWinCheck} is the Winner!`;
@@ -92,7 +86,8 @@ let documentReady = function () {
         });
         iterator += 1;
 
-        // functionality to change style of a cell when hovered over
+        // functionality to change style of a cell (square) when hovered over
+        // and when moved from
         square.addEventListener('mouseover', (event) => {
             square.classList.add("hover");
         });
@@ -106,6 +101,8 @@ let documentReady = function () {
 
 let gameRestart = function () {
     console.log("Game Restart Function called");
+
+    // local variables set to default values to facilitate restarting game
     let gameBoard = document.getElementById("board");
     let status = document.getElementById("status");
     gameBoardArray = ["", "", "", "", "", "", "", "", ""];
@@ -113,6 +110,7 @@ let gameRestart = function () {
     markerSwitchValue = 0;
     targetValue = "X";
 
+    // perform each operation on each square on the game board
     for (let square of gameBoard.children) {
         // removing the class attributes from each square 
         if (square.classList.contains("X")) {
@@ -124,6 +122,8 @@ let gameRestart = function () {
 
         // removing the targets from each square where applicable
         square.textContent = "";
+
+        // revert status back to original styling and content
         status.textContent = "Move your mouse over a square and click to play an X or an O.";
         status.classList.remove("you-won");
     }
