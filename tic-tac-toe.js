@@ -15,6 +15,7 @@ let documentReady = function () {
     let element = gameBoard.querySelector("div");
     let iterator = 0;
     let gameBoardArray = ["", "", "", "", "", "", "", "", ""];
+    let currentId = "";
 
     for (let square of gameBoard.children) {
         square.classList.add("square");
@@ -31,15 +32,18 @@ let documentReady = function () {
                 }
                 square.textContent = targetValue;
                 square.classList.add("X");
-                let currentId = square.getAttribute("id");
-
+                currentId = square.getAttribute("id");
+                gameBoardArray[`${Number(currentId)}`] = targetValue;
             } else {
                 if (square.classList.contains("X")) {
                     square.classList.remove("X");
                 }
                 square.textContent = targetValue;
                 square.classList.add("O");
+                currentId = square.getAttribute("id");
+                gameBoardArray[`${Number(currentId)}`] = targetValue;
             }
+            console.log(gameBoardArray);
         });
         iterator += 1;
     }
