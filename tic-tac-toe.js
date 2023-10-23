@@ -92,6 +92,33 @@ let documentReady = function () {
     }
 
 }
+
+let gameRestart = function () {
+    let gameBoard = document.getElementById("board");
+    let status = document.getElementById("status");
+    gameBoardArray = ["", "", "", "", "", "", "", "", ""];
+    gameWinCheck = "";
+    iterator = 0;
+    currentId = "";
+    markerSwitchValue = 0;
+    targetValue = "X";
+
+    for (let square of gameBoard.children) {
+        // removing the class attributes from each square 
+        if (square.classList.contains("X")) {
+            square.classList.remove("X");
+        }
+        if (square.classList.contains("O")) {
+            square.classList.remove("O");
+        }
+
+        // removing the targets from each square where applicable
+        square.textContent = "";
+        square.removeAttribute("id");
+        status.textContent = "Move your mouse over a square and click to play an X or an O.";
+    }
+}
+
 //ensures the html loads before javascript is ran
 document.addEventListener('DOMContentLoaded', (event) => {
     documentReady();
