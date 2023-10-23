@@ -54,22 +54,34 @@ let documentReady = function () {
             markerSwitchValue = (markerSwitchValue === 0) ? 1 : 0;
 
             // determines what target is placed in a cell and changes the class
-            if (targetValue === "X") {
-                if (square.classList.contains("O")) {
-                    square.classList.remove("O");
-                }
-                square.textContent = targetValue;
-                square.classList.add("X");
-                currentId = square.getAttribute("id");
-                gameBoardArray[`${Number(currentId)}`] = targetValue;
+            if (square.classList.contains("O") || square.classList.contains("X")) {
+                // this disallows cheating
+                console.log("Cannot change value since already assigned!");
+
+                // required to ensure that after any number of attempts of 
+                // a player clicking in a cell (square) that's already taken
+                // the marker that is placed is that of the player who was waiting in the
+                // previous turn (so if the last marker placed was X, the next will always be O) 
+                targetValue = (markerSwitchValue === 0) ? "X" : "O";
+                markerSwitchValue = (markerSwitchValue === 0) ? 1 : 0;
             } else {
-                if (square.classList.contains("X")) {
-                    square.classList.remove("X");
+                if (targetValue === "X") {
+                    if (square.classList.contains("O")) {
+                        square.classList.remove("O");
+                    }
+                    square.textContent = targetValue;
+                    square.classList.add("X");
+                    currentId = square.getAttribute("id");
+                    gameBoardArray[`${Number(currentId)}`] = targetValue;
+                } else {
+                    if (square.classList.contains("X")) {
+                        square.classList.remove("X");
+                    }
+                    square.textContent = targetValue;
+                    square.classList.add("O");
+                    currentId = square.getAttribute("id");
+                    gameBoardArray[`${Number(currentId)}`] = targetValue;
                 }
-                square.textContent = targetValue;
-                square.classList.add("O");
-                currentId = square.getAttribute("id");
-                gameBoardArray[`${Number(currentId)}`] = targetValue;
             }
 
             // see printout of game board in console
