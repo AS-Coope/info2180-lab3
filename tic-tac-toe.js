@@ -14,11 +14,11 @@ let documentReady = function () {
     let gameBoard = document.getElementById("board");
     let element = gameBoard.querySelector("div");
     let iterator = 0;
-
+    let gameBoardArray = ["", "", "", "", "", "", "", "", ""];
 
     for (let square of gameBoard.children) {
         square.classList.add("square");
-        square.classList.add(`${iterator}`); // setAttribute for this to be an id instead of classlist
+        square.setAttribute("id", `${iterator}`); // setAttribute for this to be an id instead of classlist
 
         square.addEventListener('click', playerClick => {
             targetValue = (markerSwitchValue === 0) ? "X" : "O";
@@ -31,6 +31,8 @@ let documentReady = function () {
                 }
                 square.textContent = targetValue;
                 square.classList.add("X");
+                let currentId = square.getAttribute("id");
+
             } else {
                 if (square.classList.contains("X")) {
                     square.classList.remove("X");
@@ -42,7 +44,6 @@ let documentReady = function () {
         iterator += 1;
     }
 
-    let gameBoardArray = ["", "", "", "", "", "", "", "", ""];
     let gameEnd = false;
 }
 //ensures the html loads before javascript is ran
