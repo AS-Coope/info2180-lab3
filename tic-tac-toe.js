@@ -1,12 +1,14 @@
 // global variables
 let markerSwitchValue = 0;
 let targetValue = "X"
-
-let playerClick = function () {
+/*
+let playerClick = function (event) {
+    let target = event.target
     targetValue = (markerSwitchValue === 0) ? "X" : "O";
     console.log(targetValue);
     markerSwitchValue = (markerSwitchValue === 0) ? 1 : 0;
 };
+*/
 
 let documentReady = function () {
     let gameBoard = document.getElementById("board");
@@ -16,7 +18,11 @@ let documentReady = function () {
     for (let square of gameBoard.children) {
         square.classList.add("square");
         square.classList.add(`${iterator}`);
-        square.setAttribute("onclick", "playerClick()");
+        square.addEventListener('click', playerClick => {
+            targetValue = (markerSwitchValue === 0) ? "X" : "O";
+            square.textContent = targetValue
+            markerSwitchValue = (markerSwitchValue === 0) ? 1 : 0;
+        });
         iterator += 1;
     }
 
